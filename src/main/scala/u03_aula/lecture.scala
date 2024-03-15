@@ -10,6 +10,13 @@ object Sequences: //Essentially, generic linkedlist
             s match
                 case Nil() => true
                 case _ => false
+        
+        def sum (s: Sequence[Int]): Int = 
+            s match
+                case Nil() => 0
+                case Cons(h, t) => h + sum(t) //NON TAIL RECURSION
+
+            
             
 
 @main def trySeqyences() =
