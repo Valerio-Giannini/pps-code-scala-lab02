@@ -2,6 +2,7 @@ package Exercises
 
 import u02.Values.s
 import u02.AnonymousFunctions.i
+import scala.compiletime.ops.boolean
 
 object Exercise extends App:
 
@@ -34,8 +35,33 @@ object Exercise extends App:
     println(notEmpty(""))     
 
     //Currying
-    val p1: (x: Int, y: Int, z: Int) => Boolean =
-        ??? 
+    val p1: (Int, Int, Int) => Boolean =
+        (x, y, z) => x <= y && y == z
+
+   
+        
+    //Functional Composition
+    def comp(f: (Int => Int), g: (Int => Int)): (Int => Int) =
+        x => f(g(x))
+
+    val compose = comp(_-1,_*2)(5)
+    println(compose)
+
+    //Functional Composition (Generic)
+    def gComp[A , B, C](g: (A => B), f: (B => C)): (A => C) =
+        x => f(g(x))
+    
+    val gCompose = gComp((_: String) + "Hello", _== "ciaoHello")("ciao")
+    println(gCompose)
+
+
+
+
+     
+        
+        
+        
+        
         
         
 
