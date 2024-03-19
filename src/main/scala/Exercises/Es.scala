@@ -54,6 +54,13 @@ object Exercise extends App:
     val gCompose = gComp((_: String) + "Hello", _== "ciaoHello")("ciao")
     println(gCompose)
 
+    //GCD
+    def gcd(x: Int, y: Int): Int =
+        y match
+            case y if y == 0 => x
+            case _ => gcd(y, x % y)
+    val testGcd = gcd(8, 12)
+    println(testGcd)
 
 
 
