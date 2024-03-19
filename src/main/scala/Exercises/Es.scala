@@ -3,6 +3,8 @@ package Exercises
 import u02.Values.s
 import u02.AnonymousFunctions.i
 import scala.compiletime.ops.boolean
+import java.awt.Shape
+import scala.runtime.stdLibPatches.language.`3.2`
 
 object Exercise extends App:
 
@@ -35,8 +37,15 @@ object Exercise extends App:
     println(notEmpty(""))     
 
     //Currying
-    val p1: (Int, Int, Int) => Boolean =
+    val p1: (Int, Int, Int) => Boolean = //non Curried
         (x, y, z) => x <= y && y == z
+    val p2: Int => Int => Int => Boolean = //Curried
+        x => y => z => x <= y && y == z
+    
+    def p3(x: Int,y: Int,z: Int): Boolean = //non Curried
+        x <= y && y == z
+    def p4(x: Int)(y: Int)(z: Int): Boolean = // Curried
+        x <= y && y == z 
 
    
         
@@ -55,12 +64,43 @@ object Exercise extends App:
     println(gCompose)
 
     //GCD
-    def gcd(x: Int, y: Int): Int =
+    def gcd(x: Int, y: Int): Int = //Non tail recursive
         y match
             case y if y == 0 => x
             case _ => gcd(y, x % y)
     val testGcd = gcd(8, 12)
     println(testGcd)
+
+    //Perimeter shape
+    enum Shape:
+        case Rectangle (l1: Double, l2: Double)
+        case Circle (ray: Double)
+        case Square (l: Double)
+    
+    def perimeter(s: Shape): Double =
+        s match
+            case Shape.Rectangle(l1, l2) => (l1 + l2) * 2
+            case Shape.Circle(ray) => 2 * ray * 3.14
+            case Shape.Square(l) => l * 4
+    
+    def area(s: Shape): Double =
+        s match
+            case Shape.Rectangle(l1, l2) => l1 * l2
+            case Shape.Circle(ray) => 3.14 * (math.pow(ray, 2))
+            case Shape.Square(l) => math.pow(l, 2)
+    def scale(s: Shape, alpha: Double): Shape =
+        s match
+            case Shape.Rectangle(l1, l2) => Shape.Rectangle(l1 * alpha, l2 * alpha)
+            case Shape.Circle(ray) => Shape.Circle(ray * alpha)
+            case Shape.Square(l) => Shape.Square(l * alpha)
+
+end Exercise
+
+        
+        
+
+
+
 
 
 
