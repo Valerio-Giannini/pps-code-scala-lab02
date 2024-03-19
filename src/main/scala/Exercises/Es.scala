@@ -88,6 +88,7 @@ object Exercise extends App:
             case Shape.Rectangle(l1, l2) => l1 * l2
             case Shape.Circle(ray) => 3.14 * (math.pow(ray, 2))
             case Shape.Square(l) => math.pow(l, 2)
+            
     def scale(s: Shape, alpha: Double): Shape =
         s match
             case Shape.Rectangle(l1, l2) => Shape.Rectangle(l1 * alpha, l2 * alpha)
