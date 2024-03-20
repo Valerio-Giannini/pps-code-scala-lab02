@@ -11,6 +11,11 @@ object Optionals:
   // operations (/algorithms)
   object Optional:
 
+    //Implementation of Maybe
+    def maybe[A](opt: Optional[A]): Boolean = opt match
+      case Just(a) => true
+      case _       => false
+
     def isEmpty[A](opt: Optional[A]): Boolean = opt match
       case Empty() => true
       case _       => false
@@ -22,6 +27,14 @@ object Optionals:
     def map[A, B](opt: Optional[A])(f: A => B): Optional[B] = opt match
       case Just(a) => Just(f(a))
       case _       => Empty()
+
+    def filter[A](opt: Optional[A])(f: A => Boolean): Optional[A] = opt match
+      case  Just(a) if f(a) => Just(a)
+      case _                => Empty() 
+
+    
+    
+      
 
 @main def tryOptionals =
   import Optionals.* // to work with Optionals (to see Optional type)
