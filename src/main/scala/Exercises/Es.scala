@@ -9,14 +9,12 @@ import scala.runtime.stdLibPatches.language.`3.2`
 object Exercise extends App:
 
     val f: Int => String = _ match
-    case n if n > 0 =>"POSITIVE"
-    case 0 => "POSITIVE"
+    case n if n >= 0 =>"POSITIVE"
     case _ => "NEGATIVE"
     println(f(2))
 
     def positiveNum (x:Int) : String = x match
-        case x if x > 0 => "Positive"
-        case 0 => "Positive"
+        case x if x >= 0 => "Positive"
         case _ => "Negative"
         println(positiveNum(2))
 
@@ -42,13 +40,12 @@ object Exercise extends App:
     val p2: Int => Int => Int => Boolean = //Curried
         x => y => z => x <= y && y == z
     
-    def p3(x: Int,y: Int,z: Int): Boolean = //non Curried
+    def p3(x: Int, y: Int, z: Int): Boolean = //non Curried
         x <= y && y == z
     def p4(x: Int)(y: Int)(z: Int): Boolean = // Curried
         x <= y && y == z 
 
    
-        
     //Functional Composition
     def comp(f: (Int => Int), g: (Int => Int)): (Int => Int) =
         x => f(g(x))
@@ -64,7 +61,8 @@ object Exercise extends App:
     println(gCompose)
 
     //GCD
-    def gcd(x: Int, y: Int): Int = //Non tail recursive
+    @annotation.tailrec
+    def gcd(x: Int, y: Int): Int = 
         y match
             case y if y == 0 => x
             case _ => gcd(y, x % y)
